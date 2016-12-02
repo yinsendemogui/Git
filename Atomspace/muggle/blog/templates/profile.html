@@ -1,0 +1,450 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>个人中心页</title>
+      <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+      <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen" title="no title">
+      <link rel="stylesheet" href="{% static 'css/profile.css' %}" media="screen" title="no title">
+  </head>
+  <body>
+    <div class="top nav">
+        <!--顶部菜单-->
+        <div class="ui fixed borderless menu">
+            <!--麻瓜问答LOGO-->
+            <div class="logo item">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="" class="ui image" />
+                </a>
+            </div>
+            <!--搜索栏-->
+            <div class="item">
+                <div class="ui icon input">
+                  <input class="prompt" placeholder="搜索您感兴趣的内容..." type="text">
+                  <i class="search icon"></i>
+                </div>
+            </div>
+            <a class="item" href="{% url 'home' %}">
+                <img src="{% static 'images/question_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">提问</span>
+                <!--<span class="nav text" onclick="$('.ui.modal').modal('show')">提问</span>-->
+            </a>
+            <a class="item">
+                <img src="{% static 'images/read_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">阅读</span>
+            </a>
+            <a class="item" href="{% url 'answer' %}">
+                <img src="{% static 'images/answer_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">回答</span>
+            </a>
+            <div class="right menu">
+                {% if request.user.is_authenticated %}
+                    <a class="item">
+                        {% if request.user.profile.avatar %}
+                            <div class="ui image">
+                                <img src="/upload/{{ request.user.profile.avatar }}" alt="" class="ui image" />
+                            </div>
+                        {% else %}
+                            <div class="ui image">
+                                <img src="{% static 'images/avatar_hou.png' %}" alt="" class="ui image" />
+                            </div>
+                        {% endif %}
+                        <span class="nav text">{{ request.user.username|slice:'4' }}...</span>
+                    </a>
+                {% else %}
+                    <a class="item">
+                        <img src="{% static 'images/avatar_hou.png' %}" alt="" class="ui image" />
+                        <span class="nav text">未登录</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="ui vertical segment">
+        <!--个人信息-->
+        <div class="ui container user segment">
+            {% if request.user.is_authenticated %}
+                {% for profile in user_profile %}
+                    <!--头像-->
+                    {% if profile.avatar %}
+                        <a href="#">
+                            <div class="ui image">
+                                <img src="/upload/{{ profile.avatar }}" alt="" height="100px" width="100px"/>
+                            </div>
+                            <p class="user change">
+                                修改头像
+                            </p>
+                        </a>
+                    {% else %}
+                        <a href="#">
+                            <div class="ui image">
+                                <img src="{% static 'images/bigavatar.png' %}" alt="" height="100px" width="100px"/>
+                            </div>
+                            <p class="user change">
+                                修改头像
+                            </p>
+                        </a>
+                    {% endif %}
+                    <!--姓名-->
+                    {% if profile.name %}
+                        <h3 class="ui header">{{ profile.name }}</h3>
+                    {% else %}
+                        <h3 class="ui header">未输入姓名</h3>
+                    {% endif %}
+                    <!--描述-->
+                    {% if profile.desc %}
+                        <a href="#">
+                            <p class="subtitle">{{ profile.desc }}</p>
+                            <span class="ex change">修改</span>
+                        </a>
+                    {% else %}
+                        <a href="#">
+                            <p class="subtitle">未输入描述</p>
+                            <span class="ex change">修改</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            <!--如果没有登录-->
+            {% else %}
+                <a href="#">
+                    <div class="ui image">
+                        <img src="{% static 'images/bigavatar.png' %}" alt="" />
+                    </div>
+                    <p class="user change">
+                        修改头像
+                    </p>
+                </a>
+                <h3 class="ui header">未登录</h3>
+                <a href="#">
+                    <p class="subtitle">...</p>
+                    <span class="ex change">修改</span>
+                </a>
+            {% endif %}
+
+        </div>
+        <!--回答-->
+        <div class="ui container segment">
+            {% if request.user.is_authenticated %}
+                <div class="hd-head">
+                    <div class="hd-title">
+                        <h4 class="hd-name">回答</h4>
+                        <span class="hd-num">{{ answer_count }}</span>
+                    </div>
+                </div>
+                {% if answer_list|length >= 3 %}
+                    <div class="hd-list">
+                        <div class="hd-question-item">
+                            <div class="hd-question-vote-num">
+                                {{ answer_list.0.like_counts }}
+                            </div>
+                            <div class="hd-question-vote-type">
+                                赞同
+                            </div>
+                        </div>
+                        <div class="hd-main">
+                            <h4 class="hd-question">
+                                <a href="#" class="question_link">
+                                    {{ answer_list.0.question }}
+                                </a>
+                            </h4>
+                            <p class="hd-item-text">
+                                <!--模板过滤器 truncatewords 只能用于英文，slice,可用于中文-->
+                                {{ answer_list.0.content|slice:'42' }}
+                                {% if answer_list.0.content|length > 42 %}
+                                    <span>...</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hd-list">
+                        <div class="hd-question-item">
+                            <div class="hd-question-vote-num">
+                                {{ answer_list.1.like_counts }}
+                            </div>
+                            <div class="hd-question-vote-type">
+                                赞同
+                            </div>
+                        </div>
+                        <div class="hd-main">
+                            <h4 class="hd-question">
+                                <a href="#" class="question_link">
+                                    {{ answer_list.1.question }}
+                                </a>
+                            </h4>
+                            <p class="hd-item-text">
+                                {{ answer_list.1.content|slice:'42' }}
+                                {% if answer_list.1.content|length > 42 %}
+                                    <span>...</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hd-last-list">
+                        <div class="hd-question-item">
+                            <div class="hd-question-vote-num">
+                                {{ answer_list.2.like_counts }}
+                            </div>
+                            <div class="hd-question-vote-type">
+                                赞同
+                            </div>
+                        </div>
+                        <div class="hd-main">
+                            <h4 class="hd-question">
+                                <a href="#" class="question_link">
+                                    {{ answer_list.2.question }}
+                                </a>
+                            </h4>
+                            <p class="hd-item-text">
+                                {{ answer_list.2.content|slice:'42' }}
+                                {% if answer_list.2.content|length > 42 %}
+                                    <span>...</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                {% elif answer_list|length == 2 %}
+                    <div class="hd-list">
+                        <div class="hd-question-item">
+                            <div class="hd-question-vote-num">
+                                {{ answer_list.0.like_counts }}
+                            </div>
+                            <div class="hd-question-vote-type">
+                                赞同
+                            </div>
+                        </div>
+                        <div class="hd-main">
+                            <h4 class="hd-question">
+                                <a href="#" class="question_link">
+                                    {{ answer_list.0.question }}
+                                </a>
+                            </h4>
+                            <p class="hd-item-text">
+                                {{ answer_list.0.content|slice:'42' }}
+                                {% if answer_list.0.content|length > 42 %}
+                                    <span>...</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hd-last-list">
+                        <div class="hd-question-item">
+                            <div class="hd-question-vote-num">
+                                {{ answer_list.1.like_counts }}
+                            </div>
+                            <div class="hd-question-vote-type">
+                                赞同
+                            </div>
+                        </div>
+                        <div class="hd-main">
+                            <h4 class="hd-question">
+                                <a href="#" class="question_link">
+                                    {{ answer_list.1.question }}
+                                </a>
+                            </h4>
+                            <p class="hd-item-text">
+                                {{ answer_list.1.content|slice:'42' }}
+                                {% if answer_list.1.content|length > 42 %}
+                                    <span>...</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                {% elif answer_list|length == 1 %}
+                    <div class="hd-last-list">
+                            <div class="hd-question-item">
+                                <div class="hd-question-vote-num">
+                                    {{ answer_list.0.like_counts }}
+                                </div>
+                                <div class="hd-question-vote-type">
+                                    赞同
+                                </div>
+                            </div>
+                            <div class="hd-main">
+                                <h4 class="hd-question">
+                                    <a href="#" class="question_link">
+                                        {{ answer_list.0.question }}
+                                    </a>
+                                </h4>
+                                <p class="hd-item-text">
+                                    {{ answer_list.0.content|slice:'42' }}
+                                {% if answer_list.0.content|length > 42 %}
+                                    <span>...</span>
+                                {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                {% endif %}
+            {% else %}
+                <h3>您尚未登陆</h3>
+            {% endif %}
+        </div>
+        <!--提问-->
+            {% if request.user.is_authenticated %}
+                <div class="ui container segment">
+                    <div class="hd-head">
+                        <div class="hd-title">
+                            <h4 class="hd-name">提问</h4>
+                            <span class="hd-num">{{ question_count }}</span>
+                        </div>
+                    </div>
+                    {% if question_list|length >= 3 %}
+                        <div class="hd-list">
+                            <div class="hd-question-item">
+                                <div class="hd-question-vote-num">
+                                    {{ question_list.0.answer_counts }}
+                                </div>
+                                <div class="hd-question-vote-type">
+                                    回答
+                                </div>
+                            </div>
+                            <div class="hd-main">
+                                <h4 class="hd-question">
+                                    <a href="#" class="question_link">
+                                        {{ question_list.0.title }}
+                                    </a>
+                                </h4>
+                                <p class="hd-item-text">
+                                    {{ question_list.0.desc|slice:'42' }}
+                                    {% if question_list.0.desc|length > 42 %}
+                                        <span>...</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hd-list">
+                            <div class="hd-question-item">
+                                <div class="hd-question-vote-num">
+                                    {{ question_list.1.answer_counts }}
+                                </div>
+                                <div class="hd-question-vote-type">
+                                    回答
+                                </div>
+                            </div>
+                            <div class="hd-main">
+                                <h4 class="hd-question">
+                                    <a href="#" class="question_link">
+                                        {{ question_list.1.title }}
+                                    </a>
+                                </h4>
+                                <p class="hd-item-text">
+                                    {{ question_list.1.desc|slice:'42' }}
+                                    {% if question_list.1.desc|length > 42 %}
+                                        <span>...</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hd-last-list">
+                            <div class="hd-question-item">
+                                <div class="hd-question-vote-num">
+                                    {{ question_list.2.answer_counts }}
+                                </div>
+                                <div class="hd-question-vote-type">
+                                    回答
+                                </div>
+                            </div>
+                            <div class="hd-main">
+                                <h4 class="hd-question">
+                                    <a href="#" class="question_link">
+                                        {{ question_list.2.title }}
+                                    </a>
+                                </h4>
+                                <p class="hd-item-text">
+                                    {{ question_list.2.desc|slice:'42' }}
+                                    {% if question_list.2.desc|length > 42 %}
+                                        <span>...</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {% elif question_list|length == 2 %}
+                        <div class="hd-list">
+                            <div class="hd-question-item">
+                                <div class="hd-question-vote-num">
+                                    {{ question_list.0.answer_counts }}
+                                </div>
+                                <div class="hd-question-vote-type">
+                                    回答
+                                </div>
+                            </div>
+                            <div class="hd-main">
+                                <h4 class="hd-question">
+                                    <a href="#" class="question_link">
+                                        {{ question_list.0.title }}
+                                    </a>
+                                </h4>
+                                <p class="hd-item-text">
+                                    {{ question_list.0.desc|slice:'42' }}
+                                    {% if question_list.0.desc|length > 42 %}
+                                        <span>...</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hd-last-list">
+                            <div class="hd-question-item">
+                                <div class="hd-question-vote-num">
+                                    {{ question_list.1.answer_counts }}
+                                </div>
+                                <div class="hd-question-vote-type">
+                                    回答
+                                </div>
+                            </div>
+                            <div class="hd-main">
+                                <h4 class="hd-question">
+                                    <a href="#" class="question_link">
+                                        {{ question_list.1.title }}
+                                    </a>
+                                </h4>
+                                <p class="hd-item-text">
+                                    {{ question_list.1.desc|slice:'42' }}
+                                    {% if question_list.1.desc|length > 42 %}
+                                        <span>...</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {% elif question_list|length == 1 %}
+                        <div class="hd-last-list">
+                                <div class="hd-question-item">
+                                    <div class="hd-question-vote-num">
+                                        {{ question_list.0.answer_counts }}
+                                    </div>
+                                    <div class="hd-question-vote-type">
+                                        回答
+                                    </div>
+                                </div>
+                                <div class="hd-main">
+                                    <h4 class="hd-question">
+                                        <a href="#" class="question_link">
+                                            {{ question_list.0.title }}
+                                        </a>
+                                    </h4>
+                                    <p class="hd-item-text">
+                                        {{ question_list.0.desc|slice:'42' }}
+                                        {% if question_list.0.desc|length > 42 %}
+                                            <span>...</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+    </div>
+    <!--FOOTER-->
+    <div class="ui vertical center aligned segment">
+        <span class="ft-l">
+            <a href="#">Developed by Mugglecoding</a>
+        </span>
+        <span class="ft-m">
+            <a href="#">关于我们.加入我们.联系我们</a>
+        </span>
+        <span class="ft-r">
+            <a href="#">京ICP备15047012号-2</a>
+        </span>
+    </div>
+
+  </body>
+</html>

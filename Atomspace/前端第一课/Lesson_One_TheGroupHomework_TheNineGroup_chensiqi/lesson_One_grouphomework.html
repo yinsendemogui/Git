@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/semantic.css" media="screen" title="no title">
+        <link rel="stylesheet" href="chensiqi.css" media="screen" title="no title">
+        <title>grouphomework</title>
+    </head>
+    <style media="screen">
+        span {
+            margin-left: 10px;
+        }
+        .ui.inverted.fixed.borderless.menu.one{
+            position: relative;
+            background-color: rgb(52, 55, 77);
+            padding-left: 17%;
+            padding-right: 17%
+        }
+        .ui.vertical.segment.one{
+            position: relative;
+            margin-left: 17%;
+            margin-right: 40%;
+        }
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+    <body>
+            <!--菜单开始-->
+            <div class="ui inverted fixed compact borderless menu one">
+                <a href="#" class="item">
+                    <div class="ui image">
+                        <img src="images/logo.png" alt="" />
+                    </div>
+                </a>
+                <a href="#" class="item">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="搜索你感兴趣的内容...">
+                        <i class="search icon"></i>
+                    </div>
+                </a>
+                <a class="item">
+                    <img src="images/question_icon.png" alt="" class="ui icon"/>
+                    <span>提问</span>
+                </a>
+                <a class="active item">
+                    <img src="images/read_icon.png" alt="" class="ui icon"/>
+                    <span>阅读</span>
+                </a>
+                <a class="item">
+                    <img src="images/answer_icon.png" alt="" class="ui icon"/>
+                    <span>回答</span>
+                </a>
+                <div class="right menu">
+                    <div class="item">
+                        <img class="ui mini rounded icon"src="images/avatar_hou.png" alt="" />
+                        <span>侯爵</span>
+                    </div>
+                </div>
+            </div>
+            <!--菜单结束-->
+            <!--正文开始-->
+            <div class="ui vertical segment one">
+                <div class="ui basic segment" style="padding-left:50px;">
+                    <div class="ui circular label" style="color:#003366;background-color:#ECF5FF">
+                    程序员
+                    </div>
+                    <div class="ui circular label" style="color:#003366;background-color:#ECF5FF">
+                    编程
+                    </div>
+                    <div class="ui circular label" style="color:#003366;background-color:#ECF5FF">
+                    Linux
+                    </div>
+                    <div class="ui header">
+                        <h3>维护一个大型开源项目是怎样的体验?</h3>
+                        <div class="sub header">
+                            <p>
+                            （我认为）大型开源项目包含以下任意一个或多个热证：
+                            </p>
+                            <p>
+                            &nbsp;&nbsp;·GitHub star 数量10000
+                            <br>
+                            &nbsp;&nbsp;·每周都可以接收到多个issues或PR
+                            <br>
+                            &nbsp;&nbsp;·有一些公司或其他项目在生产环境中使用
+                            <br>
+                            &nbsp;&nbsp;·任意一个或多个包管理系统中下载量巨大
+                            <br>
+                            &nbsp;&nbsp;·在项目所在领域中拥有较大关注度
+                            <br>
+                            <p>
+                                可以从以下几个方面进行回答。
+                            </p>
+                            &nbsp;&nbsp;·先介绍下你的项目，用来干什么的？
+                            <br>
+                            &nbsp;&nbsp;·在开发和维护的过程中遇到过哪些值得一提的事？
+                            <br>
+                            &nbsp;&nbsp;&nbsp;·有没有什么奇葩的issue或者PR?
+                            <br>
+                            &nbsp;&nbsp;·对你的生活或者工作有没有造成影响（好的，坏的）？
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui basic segment" style="padding-top:0;padding-bottom:0;">
+                    <h4 style="padding-left:30px;">18个回答</h4>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui grid">
+                    <div class="one wide column one">
+                        <button class="ui icon button one" type="button" name="button" style="background-color:#ECF5FF">
+                                <img src="images/upvote_icon.png" alt="" />
+                                <p style="color:#003366">
+                                    1880
+                                </p>
+                        </button>
+                        <button class="ui icon button two" type="button" name="button" style="background-color:#ECF5FF">
+                            <img src="images/upvote_icon.png" alt="" />
+                            <p style="color:#0080FF">
+                        </button>
+                    </div>
+                    <div class="fifteen wide column" >
+                        <div class="ui text menu" style="padding-left:20px;margin-top:0;">
+                            <div class="ui header" style="font-size:14px;">
+                                左文,
+                                <span style="color:#BBBBBB;">iOS/Android/Cocos开发者</span><br><br>
+                                <div class="sub header" style="font-size:3px;color:#BBBBBB;">
+                                    张涛、尤雨溪、程一楠、葛志亮、phodal等1880人赞同
+                                </div>
+                            </div>
+                            <div class="right menu">
+                                <div class="ui icon image">
+                                    <img src="images/avatar_4.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <p style="font-size:8px;padding-left:17px;">
+                            这次借着Electron 1.0 发布的机会，说说我自己维护两个大型开源项目的经历吧，分别是<a href="#">node-webkit</a> （也就是现在的NW.js）和<a href="#">Electron</a>.
+                            <br>
+                            <br>
+                            前者是几年前自己单打独斗，在公司0资源投入的情况下从两百多star一直做到好几千star，具体数字已经忘掉了，只记得当时在C++项目排行里做到了前十，直到子机另起炉灶。而后者，则是披着GitHub的光环，有着公司热心的投入，毫无障碍一路跑到了现在的三万多star
+                            <br>
+                            <br>
+                            （使用<a href="#">Star History</a>生成的star数统计图）
+                        </p>
+                        <div class="ui image">
+                            <img src="images/article_img1.png" alt="" />
+                        </div>
+                        <div class="ui header" style="font-size:15px;">
+                            一切从node-webkit开始
+                        </div>
+                        <p style="font-size:8px;">
+                            绝大部分人可能并不知道，node-webkit在最初发布的时候（2011年），并不是面向开发桌面应用程序，而是一个Node.js,可以创建一个Webkit窗口。神奇的一点是，你可以在这个窗口的页面里调用Node.js的模块.
+                            <br>
+                            <br>
+                            Node.js代码：
+                            <div class="ui basic segment" style="background-color:#F0F0F0">
+                                <p>
+                                    var nwebkit = require(<a href="#" style="color:red">'nwebkit'</a>)<br>
+                                    nwebkit.init({<a href="#" style="color:red">'url'</a> : <a href="#" style="color:red">'index.html'</a>},function (){<br>
+                                    &nbsp;
+                                    nwebkit.context.runScript('')<br>
+                                    })
+                                </p>
+                            </div>
+                        </p>
+                        <div class="ui text menu" style="font-size:12px;">
+                            <div class="item" style="color:#BBBBBB;">
+                                发布于2016-05-24
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <div class="ui image">
+                                    <img src="images/comment_icon.png" alt="" />
+                                </div>
+                                238条评论
+                            </div>
+                        </div>
+                        <div class="ui divider"></div>
+                    </div>
+                </div>
+            </div>
+            <!--正文结束-->
+
+    </body>
+</html>

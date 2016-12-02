@@ -1,0 +1,19 @@
+.ui.inverted.borderless.fixed.red.menu.one {
+    position: relative;
+    height: 50px;
+
+
+}
+
+.ui.basic.segment.one {
+    position: relative;
+
+    margin-top: 40px;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-width: 0;
+
+}
+ui.basic.segment.two {
+
+}

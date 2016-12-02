@@ -1,0 +1,9 @@
+.ui.header {
+    font-size: 5em;
+    background-color: rgb(237, 209, 192);
+    color: blue;
+    border-left: 3px solid green;
+    padding-left: 5px;
+    padding: 50%;
+    
+}

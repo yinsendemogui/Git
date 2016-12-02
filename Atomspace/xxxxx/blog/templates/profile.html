@@ -1,0 +1,212 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>个人中心页</title>
+      <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+      <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen" title="no title">
+      <link rel="stylesheet" href="{% static 'css/profile.css' %}" media="screen" title="no title">
+  </head>
+  <body>
+    <div class="top nav">
+        <div class="ui fixed borderless menu">
+            <div class="logo item">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="" class="ui image" />
+                </a>
+            </div>
+            <div class="item">
+                <div class="ui icon input">
+                  <input class="prompt" placeholder="搜索您感兴趣的内容..." type="text">
+                  <i class="search icon"></i>
+                </div>
+            </div>
+            <a class="item">
+                <img src="{% static 'images/question_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">提问</span>
+            </a>
+            <a class="item">
+                <img src="{% static 'images/read_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">阅读</span>
+            </a>
+            <a class="item">
+                <img src="{% static 'images/answer_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">回答</span>
+            </a>
+            <div class="right menu">
+                <a class="item">
+                    <img src="{% static 'images/avatar_hou.png' %}" alt="" class="ui image" />
+                    <span class="nav text">侯爵</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="ui vertical segment">
+        <div class="ui container user segment">
+            <a href="#">
+                <div class="ui image">
+                    <img src="{% static 'images/bigavatar.png' %}" alt="" />
+                </div>
+                <p class="user change">
+                    修改头像
+                </p>
+            </a>
+            <h3 class="ui header">侯爵</h3>
+            <a href="#">
+                <p class="subtitle">麻瓜编程创始人</p>
+                <span class="ex change">修改</span>
+            </a>
+        </div>
+        <div class="ui container segment">
+            <div class="hd-head">
+                <div class="hd-title">
+                    <h4 class="hd-name">回答</h4>
+                    <span class="hd-num">65</span>
+                </div>
+            </div>
+            <div class="hd-list">
+                <div class="hd-item">
+                    <div class="hd-vote-num">
+                        337
+                    </div>
+                    <div class="hd-vote-type">
+                        赞同
+                    </div>
+                </div>
+                <div class="hd-main">
+                    <h4 class="hd-question">
+                        <a href="#" class="question_link">
+                            你们是怎么学会正则表达式的？
+                        </a>
+                    </h4>
+                    <p class="hd-item-text">
+                        我简单回忆了一下，其实很简单，就是一点，所有正则表达式的需求，都应该经过自己思考完...
+                    </p>
+                </div>
+            </div>
+            <div class="hd-list">
+                <div class="hd-item">
+                    <div class="hd-vote-num">
+                        330
+                    </div>
+                    <div class="hd-vote-type">
+                        赞同
+                    </div>
+                </div>
+                <div class="hd-main">
+                    <h4 class="hd-question">
+                        <a href="#" class="question_link">
+                            你们是怎么学会正则表达式的？
+                        </a>
+                    </h4>
+                    <p class="hd-item-text">
+                        我简单回忆了一下，其实很简单，就是一点，所有正则表达式的需求，都应该经过自己思考完...
+                    </p>
+                </div>
+            </div>
+            <div class="hd-last-list">
+                <div class="hd-item">
+                    <div class="hd-vote-num">
+                        300
+                    </div>
+                    <div class="hd-vote-type">
+                        赞同
+                    </div>
+                </div>
+                <div class="hd-main">
+                    <h4 class="hd-question">
+                        <a href="#" class="question_link">
+                            你们是怎么学会正则表达式的？
+                        </a>
+                    </h4>
+                    <p class="hd-item-text">
+                        我简单回忆了一下，其实很简单，就是一点，所有正则表达式的需求，都应该经过自己思考完...
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="ui container segment">
+            <div class="hd-head">
+                <div class="hd-title">
+                    <h4 class="hd-name">提问</h4>
+                    <span class="hd-num">3</span>
+                </div>
+            </div>
+            <div class="hd-list">
+                <div class="hd-question-item">
+                    <div class="hd-question-vote-num">
+                        1491
+                    </div>
+                    <div class="hd-question-vote-type">
+                        回答
+                    </div>
+                </div>
+                <div class="hd-main">
+                    <h4 class="hd-question">
+                        <a href="#" class="question_link">
+                            你们是怎么学会正则表达式的？
+                        </a>
+                    </h4>
+                    <p class="hd-item-text">
+                        我简单回忆了一下，其实很简单，就是一点，所有正则表达式的需求，都应该经过自己思考完...
+                    </p>
+                </div>
+            </div>
+            <div class="hd-list">
+                <div class="hd-question-item">
+                    <div class="hd-question-vote-num">
+                        40K
+                    </div>
+                    <div class="hd-question-vote-type">
+                        回答
+                    </div>
+                </div>
+                <div class="hd-main">
+                    <h4 class="hd-question">
+                        <a href="#" class="question_link">
+                            你们是怎么学会正则表达式的？
+                        </a>
+                    </h4>
+                    <p class="hd-item-text">
+                        我简单回忆了一下，其实很简单，就是一点，所有正则表达式的需求，都应该经过自己思考完...
+                    </p>
+                </div>
+            </div>
+            <div class="hd-last-list">
+                <div class="hd-question-item">
+                    <div class="hd-question-vote-num">
+                        11K
+                    </div>
+                    <div class="hd-question-vote-type">
+                        回答
+                    </div>
+                </div>
+                <div class="hd-main">
+                    <h4 class="hd-question">
+                        <a href="#" class="question_link">
+                            你们是怎么学会正则表达式的？
+                        </a>
+                    </h4>
+                    <p class="hd-item-text">
+                        我简单回忆了一下，其实很简单，就是一点，所有正则表达式的需求，都应该经过自己思考完...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui vertical center aligned segment">
+        <span class="ft-l">
+            <a href="#">Developed by Mugglecoding</a>
+        </span>
+        <span class="ft-m">
+            <a href="#">关于我们.加入我们.联系我们</a>
+        </span>
+        <span class="ft-r">
+            <a href="#">京ICP备15047012号-2</a>
+        </span>
+    </div>
+
+  </body>
+</html>

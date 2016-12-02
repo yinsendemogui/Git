@@ -1,0 +1,220 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>回答界面</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen" title="no title">
+    <link rel="stylesheet" href="{% static 'css/answer.css' %}" media="screen" title="no title">
+  </head>
+  <body>
+    <div class="top nav">
+        <div class="ui fixed borderless menu">
+            <div class="logo item">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="" class="ui image" />
+                </a>
+            </div>
+            <div class="item">
+                <div class="ui icon input">
+                  <input class="prompt" placeholder="搜索您感兴趣的内容..." type="text">
+                  <i class="search icon"></i>
+                </div>
+            </div>
+            <a class="item" href="{% url 'home' %}">
+                <img src="{% static 'images/question_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">提问</span>
+            </a>
+            <a class="item">
+                <img src="{% static 'images/read_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">阅读</span>
+            </a>
+            <a class="item">
+                <img src="{% static 'images/answer_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">回答</span>
+            </a>
+            <div class="right menu">
+                <!--<a class="item" href="{% url 'profile' %}">-->
+                    <!--<img src="{% static 'images/avatar_hou.png' %}" alt="" class="ui image" />-->
+                    <!--<span class="nav text">{{ request.user.username|slice:'4' }}...</span>-->
+                <!--</a>-->
+                {% if request.user.is_authenticated %}
+                    <a class="item" href="{% url 'profile' %}">
+                        {% if request.user.profile.avatar %}
+                            <div class="ui image">
+                                <img src="/upload/{{ request.user.profile.avatar }}" alt="" class="ui image" />
+                            </div>
+                        {% else %}
+                            <div class="ui image">
+                                <img src="{% static 'images/avatar_hou.png' %}" alt="" class="ui image" />
+                            </div>
+                        {% endif %}
+                        <span class="nav text">{{ request.user.username|slice:'4' }}...</span>
+                    </a>
+                {% else %}
+                    <a class="item" href="{% url 'login' %}">
+                        <img src="{% static 'images/avatar_hou.png' %}" alt="" class="ui image" />
+                        <span class="nav text">未登录</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<!-- 标题栏结束 -->
+<!-- 内容部分开始 -->
+    <div class="ui basic segment" style="margin-bottom:0px;padding-bottom:0px;">
+      <div class="ui grid">
+        <div class="three wide column"></div>
+        <!-- 空格 -->
+        <div class="seven wide column">
+          <div class="on the line">
+            <span class="active item all question">
+              全部话题
+            </span>
+          </div>
+          <!-- 线上的内容 -->
+          <div class="ui divider"></div>
+          <!-- 第一条线 -->
+            <form class="ui form" action="{% url 'answer' %}" method="post">
+                <!--<button class="ui circular blue button" style="width:48px;height:24px;padding:0px;"><span style="color: #ffffff;">CSS</span></button>-->
+                <!--&lt;!&ndash; circular是让按钮变成圆弧形 &ndash;&gt;-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">Python</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">GitHub</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">设计模式</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">工具资源</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">移动开发</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">黑科技</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">程序员</span></button>-->
+    <!--&lt;!&ndash; 最后的margin-left值要修改&ndash;&gt;-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-top:10px;"><span style="color: #225599;">代码规范</span></button>-->
+                <!--<button class="ui circular basic button" style="width:91px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">JavaScript</span></button>-->
+                <!--<button class="ui circular basic button" style="width:56px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">面试</span></button>-->
+                <!--<button class="ui circular basic button" style="width:56px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">算法</span></button>-->
+                <!--<button class="ui circular basic button" style="width:56px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">性能</span></button>-->
+                <!--<button class="ui circular basic button" style="width:56px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">开源</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">Django</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">HTML</span></button>-->
+
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-top:10px;"><span style="color: #225599;">数据库</span></button>-->
+                <!--<button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;"><span style="color: #225599;">表结构</span></button>-->
+                {% for topic in topic_list %}
+                    {% if topic.id == id %}
+                        <button class="ui circular blue button" style="width:48px;height:24px;padding:0px;" name="id" value="{{ topic.id }}" ><span style="color: #ffffff;">{{ topic }}</span></button>
+                    {% else %}
+                        <button class="ui circular basic button" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;" name="id" value="{{ topic.id }}" ><span style="color: #225599;">{{ topic }}</span></button>
+                    {% endif %}
+                {% endfor %}
+                <!--<span style="color: #666666;margin-left:13px;">展开更多</span>-->
+                <input type="hidden" name="tagg", value="{{ tag }}"></input>
+                {% if tag == 'True' %}
+                <button class="ui circular basic button" type="submit" name="tag" value="False" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;">
+                    <span style="color: #666666;margin-left:13px;">收缩</span>
+                </button>
+                {% else %}
+                <button class="ui circular basic button" type="submit" name="tag" value="True" style="width:66px;height:24px;padding:0px;margin-left:10px;color:#daecf5;">
+                    <span style="color: #666666;margin-left:13px;">展开更多</span>
+                </button>
+                {% endif %}
+                {% csrf_token %}
+            </form>
+            <!-- 按钮们结束 -->
+          <div class="ui divider"></div>
+          <!-- 第二条线 -->
+    <!-- 第一个人部分 -->
+            {% for question in question_list %}
+          <div class="ui items">
+            <div class="item">
+              <div class="ui image">
+                <!--<img src="{% static 'images/avatar_yellow.png' %}" style="width:38px;height:38px">-->
+                {% if question.author.avatar %}
+                <img src="/upload/{{ question.author.avatar }}">
+                {% else %}
+                <img src="{% static 'images/avatar_hou.png' %}">
+                {% endif %}
+              </div>
+              <div class="content" style="padding-left:10px;">
+                <div class="header" style="color:#2e5e9f;font-size:14px;">
+                  {{ question.title }}
+                </div>
+                <span style="color:#BFBFBF">{{ question.createtime }}</span>
+                <div class="meta">
+                  <span style="font-weight:bold;color:#000000;">{{ question.author }},</span>
+                  <span style="color:#BFBFBF">{{ question.author.desc }}</span>
+                </div>
+
+                <div class="ui basic segment-p">
+                  <p style="line-height: 1.69;">{{ question.desc|slice:'145'  }}... <a style="fort-size:12px;line-height:1.83">显示全部</a></p>
+                </div>
+                <form class="ui form" action="{% url 'answer' %}" method="post">
+                    <div class="extra">
+                      <button style="width: 77px;height: 28px;border-radius: 3px;background-color: #eff6fa;border: solid 1px #bbcadc;" name="detail" value="{{ question.id }}"><i class="write icon" style="color: #225599;"></i><span style="color: #225599;">回答</span></button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+                </div>
+              </div>
+              <div class="ui divider"></div>
+          </div>
+            {% endfor %}
+    <!-- 第二个人部分 -->
+          <!--<div class="ui items">-->
+            <!--<div class="item">-->
+              <!--<div class="ui image">-->
+                <!--<img src="{% static 'images/avatar_green.png' %}" style="width:38px;height:38px">-->
+              <!--</div>-->
+              <!--<div class="content" style="padding-left:10px;">-->
+                <!--<div class="header" style="color:#2e5e9f;font-size:14px;">-->
+                  <!--关于viewer.js的问题 图片查看时如何设置居中？-->
+                <!--</div>-->
+                <!--<span style="color:#BFBFBF">2小时前</span>-->
+                <!--<div class="meta">-->
+                  <!--<span style="font-weight:bold;color:#000000;">贺嘉，</span>-->
+                  <!--<span style="color:#BFBFBF">腾讯云布道师、TEDxZhuhai策展人</span>-->
+                <!--</div>-->
+
+                <!--<div class="ui basic segment-p">-->
+                  <!--<img class="ui small left floated image" src="{% static 'images/answer_img.png' %}" style="width: 200px;height: 130px;">-->
+                  <!--<p style="line-height: 1.69;">Viewer.js – 强大的JS/jQuery图片查看器。根据以上资料自己做了个demo。由于工作需要，要在bootstrap的modal层里应用viewer，遇到的问题是：在modal层里应用viewer无法居中，如图：请问，该如何设置使预览放大的照片在modal内居中？代码：jsfiddle 点击查看... <a style="fort-size:12px;line-height:1.83">显示全部</a></p>-->
+                <!--</div>-->
+
+                <!--<div class="extra">-->
+                  <!--<button style="width: 77px;height: 28px;border-radius: 3px;background-color: #eff6fa;border: solid 1px #bbcadc;margin:0px;" ><i class="write icon" style="color: #225599;"></i><span style="color: #225599;">回答</span></button>-->
+                <!--</div>-->
+
+                <!--</div>-->
+              <!--</div>-->
+          <!--</div>-->
+    <!-- 第二个人结束 -->
+    <!-- 按钮开始 -->
+          <div class="ui button" tabindex="0" style="color:#225599;width:633px;height:35px;margin-left:0px;margin-top:300px;margin-bottom:0px;background-color:#eff6fa;">
+            <div class="visible content">加载更多</div>
+          </div>
+
+
+
+        </div><!-- 七格栅格系统结束 -->
+        <div class="six wide column"></div>
+        <!-- 空格 -->
+      </div>
+    </div>
+    <!-- 内容部分结束 -->
+    <!-- 网页footer部分开始 -->
+        <div class="ui basic segment footer">
+          <div class="ui divider" style="width:960px;height:3px;"></div>
+          <div class="ui three column grid">
+            <div class="column">
+              <div class="footer1">Developed by Mugglecoding team 一队五组</div>
+            </div>
+            <div class="column">
+              <div class="footer2">关于我们 . 加入我们 . 联系我们</div>
+            </div>
+            <div class="column">
+              <div class="footer3">京ICP备15047012号-2</div>
+            </div>
+          </div>
+        </div>
+
+    <!-- 网页footer部分结束 -->
+  </body>
+</html>

@@ -1,0 +1,57 @@
+.ui.segment.one{
+    width: 100%;
+    height: 384px;
+    background:url('images/brick.jpg');
+    background-repeat: repeat;
+    background-size: 64px;
+    position: relative;
+    margin:10px;
+    padding: 0;
+
+
+}
+.ui.segment.two {
+    width: 256px;
+    height: 384px;
+    background: url('images/cobble_stone.png');
+    background-size: 64px;
+    left: 50%;
+    transform: translate(-50%,0);
+    padding: 0;
+}
+.ui.segment.three {
+    width: 256px;
+    height: 192px;
+    margin-top: 192px;
+    background: url('images/stonebrick.png');
+    background-repeat: repeat;
+    background-size: 50px;
+    padding: 0;
+}
+.ui.segment.four {
+    width: 128px;
+    height: 128px;
+    margin: 64px 64px 0 64px;
+    background: url('images/inner_cobble_stone.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    padding: 0;
+}
+.ui.segment.five {
+    width: 128px;
+    height: 64px;
+    margin-top: 64px;
+    background: url('images/har.gif');
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    background-color: transparent;
+    padding: 0;
+}
+.ui.segment.six {
+    width: 128px;
+    height: 64px;
+    background: url("images/Iron_bars.png");
+    background-repeat: repeat;
+    background-size: 54px;
+    padding: 0;
+}

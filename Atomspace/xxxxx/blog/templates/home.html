@@ -1,0 +1,280 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>主页</title>
+        <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'css/common.css' %}" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'css/dialog.css' %}" media="screen" title="no title" charset="utf-8">
+        <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/semantic.js' %}"></script>
+
+    </head>
+    <body>
+        <!--菜单部分开始-->
+ <div class="top nav">
+        <div class="ui fixed borderless menu">
+            <div class="logo item">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="" class="ui image" />
+                </a>
+            </div>
+            <div class="item">
+                <div class="ui icon input">
+                  <input class="prompt" placeholder="搜索您感兴趣的内容..." type="text">
+                  <i class="search icon"></i>
+                </div>
+            </div>
+            <a class="item">
+                <img src="{% static 'images/question_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text" onclick="$('.ui.modal').modal('show')">提问</span>
+            </a>
+            <a class="item">
+                <img src="{% static 'images/read_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">阅读</span>
+            </a>
+            <a class="item">
+                <img src="{% static 'images/answer_icon.png' %}" alt="" class="ui image" />
+                <span class="nav text">回答</span>
+            </a>
+            <div class="right menu">
+                    {% if request.user.is_authenticated %}
+                    <a class="item" href="{% url 'profile' %}" >
+                        <img src="{{ user.profile.avatar.url }}" alt="" class="ui small image" style="width:37px;height:37px;" />
+                        <span class="nav text">{{ user.profile.name }}</span>
+                    </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="ui inverted circular button">Signup/Login</a>
+                    {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+        <!--主体部分！！！频道推荐-->
+        <div class="ui vertical segment channel">
+            <span style="font-family: SourceHanSansSC;font-weight:bold;">频道</span>
+            <div class="ui divider 2" style="color: #cccccc;"></div>
+
+            <div class="row" style="margin-top:13px;margin-bottom:13px;">
+                <div class="ui image">
+                    <img src="{% static 'images/recommand_icon.png' %}" alt="" />
+                </div>
+                <a class="channel-item" href="#">推荐</a>
+            </div>
+
+            <div class="row" style="margin-top:13px;margin-bottom:13px;">
+                <div class="Rectangle-11">
+                    <div class="ui image">
+                        <img src="{% static 'images/front_icon.png' %}" alt="" />
+                    </div>
+                    <a class="channel-item" href="#">前端</a>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:13px;margin-bottom:13px;">
+                <div class="ui image">
+                    <img src="{% static 'images/end_icon.png' %}" alt="" />
+                </div>
+                <a class="channel-item" href="#">后端</a>
+            </div>
+
+            <div class="row" style="margin-top:13px;margin-bottom:13px;">
+                <div class="ui image">
+                    <img src="{% static 'images/design_icon.png' %}" alt="" />
+                </div>
+                <a class="channel-item" href="#">设计</a>
+            </div>
+
+            <div class="row" style="margin-top:13px;margin-bottom:13px;">
+                <div class="ui image">
+                    <img src="{% static 'images/product_icon.png' %}" alt="" />
+                </div>
+                <a class="channel-item" href="#">产品</a>
+            </div>
+
+        </div>
+
+<!--主体部分！！！内容开始-->
+        <div class="Rectangle answer">
+            <span style="font-family: SourceHanSansSC;font-weight:bold;">前端</span>
+            <div class="ui divider 2" style="color: #cccccc;"></div>
+
+            <div class="ui items">
+<!--主体部分！！！个信息框-->
+
+            {% for answer in answer_list %}
+            <div class="item">
+                <div class="ui small image" style="width:37px;height:37px;">
+                    <img src="{{ answer.author.avatar.url }}">
+                    <div class="Rectangle-7">
+                        {% if request.user.user_tickets.choice is not True %}
+                            <form class="ui form" action="{% url 'vote' answer.id %}" method="post">
+                                <button  style="color: #698ebf;font-size:12px;font-weight: bold;"type="submit" name="vote" value="like">
+                                    {{ answer.like_counts }} </button>{% csrf_token %}
+                            </form>
+                        {% else %}
+                            <span style="color: #698ebf;font-size:12px;font-weight: bold;">已赞</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="content" style="display:inline-block;">
+                    <div class="header" style="font-size:15px;color:#225599;">{{ answer.question.title }}</div>
+                    <div class="meta">
+                        <span style="font-weight:bold;">{{ answer.author.name }}</span>
+                        <span style="color:grey">{{ answer.author.desc }}</span>
+                    </div>
+
+                    <div class="ui left floated image" style="width:200px;height:112px;margin-right:15px;">
+                        <img src="{% static 'images/img1.png' %}" alt="" />
+                    </div>
+
+                    <div class="description">
+                            <p style="font-size:13px;line-height:1.69;font-stretch: normal;">{{ answer.content }}
+                                <a href="{% url 'detail' answer.question.id %}" style="font-weight:bold;">显示全部</a></p>
+                    </div>
+
+
+                    <div class="extra" style="">
+                        <i class="comment icon"></i>
+                        <span style="font-size:13px;">{{ answer.comment_counts }} 条评论</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            {% endfor %}
+
+<!--主体部分！！！信息框-->
+
+            </div>
+            <div class="ui long button">
+                <div class="header item">
+                    <a href="#">加载更多</a>
+                </div>
+                {# 装作有分页器 #}
+                {# {% if article_list.has_previous %}
+                    <a href="?page={{ article_list.previous_page_number }}" class="item">
+                        <i class="icon red left caret"></i>
+                    </a>
+                {% else %}
+                    <a href="?page={{ article_list.start_index }}" class="disabled item">
+                        <i class="icon  left caret"></i>
+                    </a>
+                {% endif %}
+
+                {% for page_number in article_list.paginator.page_range %}
+                    {% ifequal page_number  article_list.number %}
+                        <a href="?page={{ page_number }}" class="active item" style="background-color: red; color:white">
+                            {{ page_number }}
+                        </a>
+                    {% else %}
+                        <a href="?page={{ page_number }}" class=" item">
+                            {{ page_number }}
+                        </a>
+                    {% endifequal %}
+                {% endfor %}
+
+                {% if  article_list.has_next %}
+                    <a href="?page={{ article_list.next_page_number }}" class="item">
+                        <i class="icon red right caret"></i>
+                    </a>
+                {% else %}
+                    <a href="?page={{ article_list.paginator.num_pages }}" class="disabled item">
+                        <i class="icon  right caret"></i>
+                    </a>
+                {% endif %} #}
+            </div>
+        </div>
+
+
+        <!--结束部分-->
+        <div class="ui segment container-bottom">
+            <div class="ui three column grid" >
+                <div class="column">
+                    <span>Developed by Mugglecoding team 1队5组</span>
+                </div>
+                <div class="column" style="padding-left:100px;">
+                    <span>关于我们.加入我们.联系我们</span>
+                </div>
+                <div class="column" style="padding-left:200px;">
+                    <span style="200px;">京ICP备15047012号</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui modal">
+            <!-- 页面标题栏 -->
+            <div class="ui secondary menu q_head">
+                <h3 class="header item">提问</h3>
+                <div class="right menu">
+                    <div class="item">
+                        <a href="javascript:$('.ui.modal').modal('hide')"><img src="{% static 'images/close_icon.png' %}" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="ui secondary menu q_head">
+                <h3 class="header item">提问</h3>
+                <div class="right floated item">
+                    <a href="#"><img src="images/close_icon.png" alt="" /></a>
+                </div>
+            </div> -->
+            <div class="ui basic segment">
+                <form class="ui form q_content" method="post">
+                    <!-- 问题内容 -->
+                    {% if form.errors %}
+                    <div class="ui error message" style="width:300px; position:relative; left:50%; transform:translate(-50%,0%);">
+                        {{ form.errors }}
+                    </div>
+                    {% endif %}
+                    {% if errors %}
+                    <div class="ui error message" style="width:300px; position:relative; left:50%; transform:translate(-50%,0%);">
+                        {{ errors }}
+                    </div>
+                    {% endif %}
+                    <div class="ui fluid input">
+                        <!--<input type="text" name="name" value="" placeholder="写下你的问题">-->
+                        {{ form.title }}
+                    </div>
+                    <!-- 问题说明 -->
+                    <div class="ui secondary menu q_desc">
+                        <label class="header item">
+                            问题说明：
+                        </label>
+                        <div class="right menu">
+                            <div class="ui image item" title="插入代码">
+                                <a href="#"><img src="{% static 'images/code_icon.png' %}" alt="" /></a>
+                            </div>
+                            <div class="ui image item" title="插入图片">
+                                <a href="#"><img src="{% static 'images/img_icon.png' %}" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<textarea name="name" rows="8" placeholder="问题背景、相关代码及截图等详细信息"></textarea>-->
+                    {{ form.desc }}
+                    <div class="field">
+                        <label for="" style="margin-bottom:10px;margin-top: 10px;">添加话题：</label>
+                        <!--<input type="text" name="name" value="" placeholder="话题之间空格隔开">-->
+                        {{ form.topic }}
+                    </div>
+                    {% csrf_token %}
+                    <!-- 是否发布动作 -->
+                    <div class="actions">
+                        <div class="ui right floated buttons">
+                            <div class="ui basic button item" onclick="$('.ui.modal').modal('hide')">
+                                取消
+                            </div>
+                            <!--<input type="hidden" name="referer", value="{{ referer }}"></input>-->
+                            <input class="ui blue button item" type="submit">
+                                发布
+                            </input>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>
