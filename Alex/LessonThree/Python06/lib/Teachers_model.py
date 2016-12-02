@@ -15,11 +15,16 @@ class teacher_Model:
         self.__Calary = 0     #工资
 
     def teacher_Accident(self):   #教学事故
-        print ('教学事故出现，课程休业失败！')
-        self.__Calary -= 100
+        self.__Calary -= 10
 
-    def calary_Return(self):   #返回工资
+
+    def teacher_Success(self,cost):   #教学成功
+        self.__Calary += int(cost)
+
+
+    def calary_Return(self):   #返回工资数据
         return self.__Calary
+
 
 
 
