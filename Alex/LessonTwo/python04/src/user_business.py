@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # 用户业务层
 
-import os,random,time
-import admin_business
+import os,random,time,sys
+sys.path.append('..')
+from src import admin_business
 from lib import common
 
 
@@ -290,13 +291,13 @@ def User_information():
                                    dict['Repayment_date'],lab,dict['cash'],
                                    dict['Actual_overdraft'],dict['Overdraft_limit'])
         print(text)
-        print '''
+        print ('''
                            您可以进行如下操作：
                             1，修改登录密码
                             2，绑定银行卡
                             3，修改银行卡密码
                             4，返回菜单
-              '''
+              ''')
         while TAG:
             decide = raw_input('你想做点什么？')
             if decide == '1':
