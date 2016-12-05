@@ -442,7 +442,7 @@ def User_Transfer_Money(log = None):
             decide = raw_input('请问你想做点什么？')
             if decide == '1':
                 name = raw_input('请输入你想转账的人的用户名：')
-                if os.path.exists('db/'+name+'_log') == False:
+                if os.path.exists(DIR +name+'_log') == False:
                     print ('没有这个用户存在！请重新输入！')
                     break
                 elif common.log_info_specific_read(name, 'account') == 'empty':
